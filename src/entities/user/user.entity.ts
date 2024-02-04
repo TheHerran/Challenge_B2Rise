@@ -10,6 +10,7 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
+import { Order } from "../orders/orders.entity";
 
 
 @Entity("users")
@@ -29,6 +30,10 @@ export class User {
 
     @Column({ name: "is_active", default: true })
     isActive: boolean;
+
+    @OneToMany(() => Order, (order) => order.user)
+    @JoinColumn()
+    order: Order;
 
     @CreateDateColumn({ name: "created_at" })
     createdAt: Date;
