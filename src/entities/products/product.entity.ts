@@ -30,7 +30,7 @@ export class Products {
     order: Order;
 
     @Column("decimal", { precision: 7, scale: 2 })
-    price: string;
+    price: number;
 
     @CreateDateColumn({ name: "created_at" })
     createdAt: Date;
