@@ -5,7 +5,7 @@ import { IUserRequest } from "../../interfaces/user.interface";
 declare global {
     namespace Express {
         interface Request{
-            newUser: IUserRequest
+            user: IUserRequest;
         }
     }
 }
