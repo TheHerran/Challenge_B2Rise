@@ -1,7 +1,7 @@
 import { AppError } from "../../errors/AppError";
 import { userRepository } from "../../utils/repositories";
 
-const deleteUserService = async (id: string) => {
+const deleteUserService = async (id: string): Promise<boolean> => {
     const users = await userRepository.find();
     const user = users.find((user) => user.id === id);
 
@@ -9,7 +9,7 @@ const deleteUserService = async (id: string) => {
         throw new AppError(404, "User not foud!");
     }
 
-    const softDelete = await userRepository.update(id, { ...user, isActive: false });
+    await userRepository.delete(id);
 
     return true;
 }

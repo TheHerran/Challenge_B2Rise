@@ -8,7 +8,7 @@ import {
     deleteUserController,
     listUsersController,
     getUserController
-} from "../../controllers/user.controller";
+} from "../../controllers/user.controllers";
 
 const userRutes = Router();
 
