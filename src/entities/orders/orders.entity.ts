@@ -7,12 +7,22 @@ import {
     OneToOne,
     OneToMany,
     JoinColumn,
+    ManyToOne,
 } from "typeorm";
+import { User } from "../user/user.entity";
+import { Products } from "../products/product.entity";
 
 @Entity("order")
-export class OrderProduct {
+export class Order {
     @PrimaryGeneratedColumn("uuid")
     readonly id: string;
+
+    @ManyToOne(() => User, { eager: true })
+    user: User;
+
+    @ManyToOne(() => Products, (product) => product.order, { eager: true })
+    @JoinColumn()
+    products: Products;
 
     @CreateDateColumn({ name: "created_at" })
     createAt: Date;
@@ -21,7 +31,7 @@ export class OrderProduct {
     updatedAt: Date;
 
     constructor() {
-        if (!this.id){
+        if (!this.id) {
             this.id = uuid()
         }
     }

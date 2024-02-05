@@ -9,6 +9,7 @@ import {
     JoinColumn,
     OneToMany
 } from "typeorm";
+import { Order } from "../orders/orders.entity";
 
 
 @Entity("products")
@@ -25,6 +26,9 @@ export class Products {
     @Column()
     description: string;
 
+    @OneToMany(() => Order, (order) => order.products)
+    order: Order;
+
     @Column("decimal", { precision: 7, scale: 2 })
     price: string;
 
@@ -34,8 +38,8 @@ export class Products {
     @UpdateDateColumn({ name: "updated_at" })
     updatedAt: Date;
 
-    constructor(){
-        if (!this.id){
+    constructor() {
+        if (!this.id) {
             this.id = uuid();
         }
     }
